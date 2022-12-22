@@ -44,4 +44,17 @@ class MenuViewViewModel
         
         return Array(Set(randomIngredients))
     }
+    
+    func sortMenuItems(_ menuItems:[RestaurantMenuItem], _ sortingArgument:SortingBy) -> [RestaurantMenuItem]
+    {
+        switch(sortingArgument)
+        {
+        case SortingBy.Alphabetically:
+            return menuItems.sorted{$0.name < $1.name}
+        case SortingBy.Price:
+            return menuItems.sorted{$0.price < $1.price}
+        case SortingBy.MostPopular:
+            return menuItems.sorted{$0.timesOrdered > $1.timesOrdered}
+        }
+    }
 }
