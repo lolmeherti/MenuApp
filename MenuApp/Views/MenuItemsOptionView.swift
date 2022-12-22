@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MenuItemsOptionView: View {
     
+    //--- BINDING FILTER VARIABLES ---//
     @Binding var foodFilter:Bool
     @Binding var drinkFilter:Bool
     @Binding var dessertFilter:Bool
@@ -54,18 +55,31 @@ struct MenuItemsOptionView: View {
                 Section {
                     Button(action: {
                         // handle selection of "Most Popular" option
+                        sortingArgument = SortingBy.MostPopular
                     }) {
-                        Text(SortingBy.MostPopular.rawValue)
+                        HStack{
+                            Text(SortingBy.MostPopular.rawValue)
+                            sortingArgument == SortingBy.MostPopular ? Image(systemName: "checkmark") : Image(systemName: "")
+                        }
                     }
                     Button(action: {
                         // handle selection of "Price $-$$$" option
+                        sortingArgument = SortingBy.Price
                     }) {
-                        Text(SortingBy.Price.rawValue)
+                        HStack{
+                            Text(SortingBy.Price.rawValue)
+                            sortingArgument == SortingBy.Price ? Image(systemName: "checkmark") : Image(systemName: "")
+                        }
                     }
                     Button(action: {
                         // handle selection of "A-Z" option
+                        sortingArgument = SortingBy.Alphabetically
                     }) {
-                        Text(SortingBy.Alphabetically.rawValue)
+                        HStack{
+                            Text(SortingBy.Alphabetically.rawValue)
+                            sortingArgument == SortingBy.Alphabetically ? Image(systemName: "checkmark") : Image(systemName: "")
+                        }
+                        
                     }
                 } header: {
                     Text("SORT BY")
