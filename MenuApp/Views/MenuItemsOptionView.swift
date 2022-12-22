@@ -19,18 +19,30 @@ struct MenuItemsOptionView: View {
                 Section {
                     Button(action: {
                         // handle selection of "Food" category
+                        foodFilter.toggle()
                     }) {
-                        Text(MenuCategory.Food.rawValue)
+                        HStack{
+                            Text(MenuCategory.Food.rawValue)
+                            foodFilter ? Image(systemName: "checkmark") : Image(systemName: "")
+                        }
                     }
                     Button(action: {
                         // handle selection of "Drink" category
+                        drinkFilter.toggle()
                     }) {
-                        Text(MenuCategory.Drink.rawValue)
+                        HStack{
+                            Text(MenuCategory.Drink.rawValue)
+                            drinkFilter ? Image(systemName: "checkmark") : Image(systemName: "")
+                        }
                     }
                     Button(action: {
                         // handle selection of "Desert" category
+                        dessertFilter.toggle()
                     }) {
-                        Text(MenuCategory.Dessert.rawValue)
+                        HStack{
+                            Text(MenuCategory.Dessert.rawValue)
+                            dessertFilter ? Image(systemName: "checkmark") : Image(systemName: "")
+                        }
                     }
                 } header: {
                     Text("SELECTED CATEGORIES")
@@ -62,8 +74,8 @@ struct MenuItemsOptionView: View {
     }
 }
 
-struct MenuItemsOptionView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuItemsOptionView()
-    }
-}
+//struct MenuItemsOptionView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        MenuItemsOptionView()
+//    }
+//}
