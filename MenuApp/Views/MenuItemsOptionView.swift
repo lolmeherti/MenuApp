@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct MenuItemsOptionView: View {
+    
+    @Binding var foodFilter:Bool
+    @Binding var drinkFilter:Bool
+    @Binding var dessertFilter:Bool
+    
     var body: some View {
         NavigationStack {
             List {
