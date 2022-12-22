@@ -13,18 +13,22 @@ struct MenuItemsView: View {
     @State var drinkFilter:Bool = true
     @State var dessertFilter:Bool = true
     
-    //--- MOCK DATA ---//
-    //these could have been implemented as dependency injections
-    //however I felt it was too much to make a dependency injection container
-    //for a little project like this. these are the only dependencies
-    let mainDishes = MenuViewViewModel().generateMenuItems(category: MenuCategory.Food, amount: 12)
-    let drinks = MenuViewViewModel().generateMenuItems(category: MenuCategory.Drink, amount: 8)
-    let desserts = MenuViewViewModel().generateMenuItems(category: MenuCategory.Dessert, amount: 4)
+    //SORTING ARGUMENT
+    @State var sortingArgument:SortingBy = .Alphabetically
     
     //--- GRID CONFIG ---//
     private var threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
+        
+        //--- MOCK DATA ---//
+        //these could have been implemented as dependency injections
+        //however I felt it was too much to make a dependency injection container
+        //for a little project like this. these are the only dependencies
+        let mainDishes = MenuViewViewModel().generateMenuItems(category: MenuCategory.Food, amount: 12, sortingArgument)
+        let drinks = MenuViewViewModel().generateMenuItems(category: MenuCategory.Drink, amount: 8, sortingArgument)
+        let desserts = MenuViewViewModel().generateMenuItems(category: MenuCategory.Dessert, amount: 4, sortingArgument)
+        
         NavigationView {//NavigationView
             ScrollView{
                 
