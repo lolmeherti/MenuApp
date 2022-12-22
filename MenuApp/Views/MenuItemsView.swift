@@ -14,6 +14,9 @@ struct MenuItemsView: View {
     @State var dessertFilter:Bool = true
     
     //--- MOCK DATA ---//
+    //these could have been implemented as dependency injections
+    //however I felt it was too much to make a dependency injection container
+    //for a little project like this. these are the only dependencies
     let mainDishes = MenuViewViewModel().generateMenuItems(category: MenuCategory.Food, amount: 12)
     let drinks = MenuViewViewModel().generateMenuItems(category: MenuCategory.Drink, amount: 8)
     let desserts = MenuViewViewModel().generateMenuItems(category: MenuCategory.Dessert, amount: 4)
@@ -43,38 +46,49 @@ struct MenuItemsView: View {
                 .padding()
                 .padding(.top, -20)
                 
-                //--- MAIN DISHES SECTION ---//
-                renderMenuItems(mainDishes, color: .blue)
+                    //-- RENDERING MAIN DISHES --//
+                    renderMenuItems(mainDishes, color: .blue)
+                }
                 
                 //--- DRINKS SECTION ---//
-                HStack{
-                    Text("Drinks")
-                        .font(.system(size: 20))
-                        .bold()
-                    Spacer()
+                if(drinkFilter)
+                {
+                    HStack{
+                        Text("Drinks")
+                            .font(.system(size: 20))
+                            .bold()
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    //-- RENDERING DRINKS --//
+                    renderMenuItems(drinks, color: .purple)
                 }
-                .padding()
-                
-                renderMenuItems(drinks, color: .purple)
                 
                 //--- DESSERTS SECTION ---//
-                HStack{
-                    Text("Desserts")
-                        .font(.system(size: 20))
-                        .bold()
-                    Spacer()
+                if(dessertFilter)
+                {
+                    HStack{
+                        Text("Desserts")
+                            .font(.system(size: 20))
+                            .bold()
+                        Spacer()
+                    }
+                    .padding()
+                    
+                    //-- RENDERING DESSERTS --//
+                    renderMenuItems(desserts, color: .pink)
+                    
                 }
-                .padding()
-                
-                renderMenuItems(desserts, color: .pink)
-                
                 Spacer()
             }
             .padding()
             .toolbar { //NavigationBar
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(
-                        destination: MenuItemsOptionView(),
+                        destination: MenuItemsOptionView(foodFilter: $foodFilter,
+                                                        drinkFilter: $drinkFilter,
+                                                        dessertFilter: $dessertFilter),
                         label: {
                             Image(systemName: "line.3.horizontal")
                         })
@@ -84,8 +98,14 @@ struct MenuItemsView: View {
         }
     }
 
+    //how does it work?
+    //clearly we are taking an array of RestaurantMenuItem instances in the first param.
+    //then we are taking a color
     func renderMenuItems(_ itemsArray:[RestaurantMenuItem], color: Color) -> LazyVGrid<ForEach<[RestaurantMenuItem], RestaurantMenuItem, some View>> {
         return LazyVGrid(columns: threeColumnGrid) {
+            //we are rendering a lazy grid containing a MenuItemSquare for each item in the array
+            //because this is a closure, the foreach loop will first complete
+            //and then all the rendered MenuItemSquares get returned
             ForEach(itemsArray, id: \.self) { menuItem in
                 NavigationLink(destination: MenuItemDetailsView(menuItem: menuItem)) {
                     VStack
