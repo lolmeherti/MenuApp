@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MenuItemsView: View {
+    //--- FILTERS ---//
+    @State var foodFilter:Bool = true
+    @State var drinkFilter:Bool = true
+    @State var dessertFilter:Bool = true
     
     //--- MOCK DATA ---//
     let mainDishes = MenuViewViewModel().generateMenuItems(category: MenuCategory.Food, amount: 12)
