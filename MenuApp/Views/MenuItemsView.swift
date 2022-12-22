@@ -92,7 +92,8 @@ struct MenuItemsView: View {
                     NavigationLink(
                         destination: MenuItemsOptionView(foodFilter: $foodFilter,
                                                         drinkFilter: $drinkFilter,
-                                                        dessertFilter: $dessertFilter),
+                                                        dessertFilter: $dessertFilter,
+                                                        sortingArgument: $sortingArgument),
                         label: {
                             Image(systemName: "line.3.horizontal")
                         })

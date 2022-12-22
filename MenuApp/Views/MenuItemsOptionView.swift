@@ -13,6 +13,9 @@ struct MenuItemsOptionView: View {
     @Binding var drinkFilter:Bool
     @Binding var dessertFilter:Bool
     
+    //--- BINDING SORTING ARGUMENT ---//
+    @Binding var sortingArgument:SortingBy
+    
     var body: some View {
         NavigationStack {
             List {

@@ -16,10 +16,13 @@ class MenuViewViewModel
     }
     
     //basically i want this function to generate menu items
-    //the way it works is by passing in an enum case.
+    //the way it works is by passing in an enum case for MenuCategory.
     //usage example generateMenuItems(category: TypeOfFood.Drink, amount: 10)
     //it generates 10 unique drinks for the menu
-    func generateMenuItems(category:MenuCategory, amount:Int) -> [RestaurantMenuItem]
+    //we can also pass an enum case for sortingBy
+    //usage example generateMenuItems(category: TypeOfFood.Drink, amount: 10, sortingArgument: SortingBy.Price)
+    //then it will sort the list in ascending order from smallest price to highest
+    func generateMenuItems(category:MenuCategory, amount:Int,_ sortingArgument:SortingBy = SortingBy.Alphabetically) -> [RestaurantMenuItem]
     {
         var menuItems:[RestaurantMenuItem] = []
         
@@ -31,7 +34,7 @@ class MenuViewViewModel
                                                 ingredients: pickRandomIngredients(),
                                                 timesOrdered: Int.random(in:0 ..< 400)))
         }
-        return menuItems
+        return sortMenuItems(menuItems, sortingArgument)
     }
     
     func pickRandomIngredients() -> [Ingredients]
