@@ -24,6 +24,16 @@ struct MenuItemsView: View {
     var body: some View {
         NavigationView {//NavigationView
             ScrollView{
+                
+                //-- IF ALL DISPLAY OPTIONS ARE OFF --//
+                if(!foodFilter && !drinkFilter && !dessertFilter)
+                {
+                    Text("No food section selected!")
+                }
+                
+                //--- MAIN DISHES SECTION ---//
+                if(foodFilter)
+                {
                 HStack{
                     Text("Main Dishes")
                         .font(.system(size: 20))
